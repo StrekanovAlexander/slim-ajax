@@ -15,7 +15,7 @@
 <head>
     <meta charset = "utf-8" />
     <title>Document</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    
 </head>
 <body>
     <h3>Ajax-loading by button click</h3>
@@ -25,7 +25,8 @@
         <?php endforeach ?>
     </div>
     <button id="more">More...</button>
-        <script type="text/javascript">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>    
+        <script>
             $(document).ready(function(){
                 var inProgress = false;
                 var startFrom = 5;

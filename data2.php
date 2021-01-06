@@ -14,7 +14,6 @@
 <head>
     <meta charset = "utf-8" />
     <title>Ajax-loading by scrolling</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 </head>
 <body>
     <h3>Ajax-loading by scrolling</h3>
@@ -23,8 +22,8 @@
             <p><?php echo $title['title']; ?></p>
         <?php endforeach ?>
     </div>
- 
-    <script type="text/javascript">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>        
+    <script>
         $(document).ready(function(){
             var inProgress = false;
             var startFrom = 5;
