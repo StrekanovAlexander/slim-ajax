@@ -1,6 +1,6 @@
 <?php
 
-require 'vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $app = new \Slim\App([
   'settings' => [
@@ -10,9 +10,13 @@ $app = new \Slim\App([
 
 $c = $app->getContainer();
 
+$c['db'] = function() {
+  return new PDO('mysql:host=localhost;dbname=simple_db', 'root', 'root');
+};
+
 $c['view'] = function($c) {
   
-  $view = new \Slim\Views\Twig(__DIR__ . '/views', [
+  $view = new \Slim\Views\Twig(__DIR__ . '/../private/views', [
     'cashe' => false
   ]);
   
@@ -24,12 +28,6 @@ $c['view'] = function($c) {
   return $view;
 }; 
 
-$app->get('/', function($req, $res) {
-  return $this->view->render($res, 'index.twig');
-})->setName('index');
-
-$app->get('/data', function($req, $res) {
-  return $this->view->render($res, 'data.twig');
-})->setName('data');
+require __DIR__ . '/../private/core/routes.php';
 
 $app->run();

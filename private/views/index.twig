@@ -1,0 +1,41 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+  <h3>Index page</h3>
+  <div id="titles">
+    {% for title in titles %}
+      <p>{{ title.title }}</p>
+    {% endfor %}
+  </div>
+  <button id="more">More...</button>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      var inProgress = false;
+      var startFrom = 5;
+      $('#more').click(function() {
+        if (!inProgress) {
+          $.ajax({
+            url: 'http://slim-ajax.loc/ajax',
+            method: 'POST',
+            data: {
+              "start" : startFrom
+            },
+            beforeSend: function() {
+              inProgress = true;
+            }
+          }).done(function(data) {
+            data = jQuery.parseJSON(data);
+            if (data.length > 0) {
+              $.each(data, function(index, data) {
+                $("#titles").append("<p>" + data.title + "</p>");
+              });
+              inProgress = false;
+              startFrom += 5;
+            }
+          });
+        }
+      });
+    });
+  </script>
+  {% endblock %}
